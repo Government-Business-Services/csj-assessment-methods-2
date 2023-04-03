@@ -1,0 +1,416 @@
+{% extends "layouts/main.html" %}
+{% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
+
+{% block pageTitle %}
+Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+{{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+
+
+<form class="form" action="select-methods-sift" method="post">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds-from-desktop">
+      <h1 class="govuk-heading-xl govuk-!-margin-top-9">At which stage do you you want to assess your criteria?</h1>
+
+
+      <div id="behInd" class="govuk-!-margin-bottom-6" style="display:block;border:1px solid lightgrey;padding:10px">
+        {% if data['criteria-behaviours'].length > 0 %}
+        <div class="govuk-!-margin-bottom-1" style="padding:5px">
+          <span style="float:right" class="govuk-caption-m"><a onclick="hideDiv('behInd')" href="#">All the same</a></span>
+          <h2 class="govuk-heading-m">Behaviours</h2>
+        </div>
+
+        {% for items in data['criteria-behaviours'] | slice(1)%}
+        {% for item in items %}
+        <div class="govuk-!-margin-top-1" style="border:1px solid lightgrey;padding:10px">
+          {% from "govuk/components/radios/macro.njk" import govukRadios %}
+
+          {{ govukRadios({
+            classes: "govuk-radios--small govuk-radios--inline",
+            name: item[loop.index],
+            id: item[loop.index],
+            fieldset: {
+              legend: {
+                text: item,
+                isPageHeading: false,
+                classes: "govuk-fieldset__legend--s"
+              }
+            },
+            items: [
+            {
+              value: "Sift",
+              checked: checked(item[loop.index],'Sift'),
+              text: "Sift"
+            },
+            {
+              value: "Interview",
+              checked: checked(item[loop.index],'Interview'),
+              text: "Interview"
+            },
+            {
+              value: "Both stages",
+              checked: checked(item[loop.index],'Both stages'),
+              text: "Both stages"
+            }
+            ]
+          }) }}
+        </div>
+        {% endfor %}{% endfor %}
+      </div>
+
+
+
+      <div id="behSame" class="govuk-!-margin-bottom-6" style="display:none">
+        <div class="govuk-!-margin-bottom-1" style="border:1px solid lightgrey;padding:10px">
+          <div class="govuk-!-margin-bottom-1" style="padding:5px">
+            <span style="float:right" class="govuk-caption-m"><a onclick="hideDiv('behSame')" href="#">Individually</a></span>
+            <h2 class="govuk-heading-m">Behaviours</h2>
+          </div>
+          {% for stems in data['criteria-behaviours'] | slice(1)  %}
+          <div class="govuk-!-margin-top-1" style="border:1px solid lightgrey;padding:10px">
+            {% from "govuk/components/radios/macro.njk" import govukRadios %}
+
+            {{ govukRadios({
+              classes: "govuk-radios--small govuk-radios--inline",
+              name: stems[loop.index],
+              id: stems[loop.index],
+              fieldset: {
+                legend: {
+                  text: stems,
+                  isPageHeading: false,
+                  classes: "govuk-fieldset__legend--s"
+                }
+              },
+              items: [
+              {
+                value: "Sift",
+                checked: checked(stems[loop.index],'Sift'),
+                text: "Sift"
+              },
+              {
+                value: "Interview",
+                checked: checked(stems[loop.index],'Interview'),
+                text: "Interview"
+              },
+              {
+                value: "Both stages",
+                checked: checked(stems[loop.index],'Both stages'),
+                text: "Both stages"
+              }
+              ]
+            }) }}
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      {% if data['criteria-technical-1'].length > 0 %}
+      <div id="techInd" class="govuk-!-margin-top-6" style="display:block;border:1px solid lightgrey;padding:10px">
+
+        <div class="govuk-!-margin-bottom-1" style="padding:5px">
+
+          <h2 class="govuk-heading-m">Technical skills</h2>
+        </div>
+
+
+
+
+        {% set techArr = [] %}
+
+        {% set techArr = (techArr.push(data['criteria-technical-1']), techArr) %}
+        {% endif %}
+
+        {% if data['criteria-technical-2'].length > 0 %}
+        {% set techArr = (techArr.push(data['criteria-technical-2']), techArr) %}
+        {% endif %}
+
+        {% if data['criteria-technical-3'].length > 0 %}
+        {% set techArr = (techArr.push(data['criteria-technical-3']), techArr) %}
+        {% endif %}
+
+        {% if techArr.length > 0 %}
+        {% set n = techArr.length %}
+        {% for things in techArr | slice(1) %}
+        {% for thing in things %}
+        <div class="govuk-!-margin-top-1" style="border:1px solid lightgrey;padding:10px">
+
+          {% from "govuk/components/radios/macro.njk" import govukRadios %}
+
+          {{ govukRadios({
+            classes: "govuk-radios--small govuk-radios--inline",
+            name: thing[loop.index],
+            id: thing[loop.index],
+            fieldset: {
+              legend: {
+                text: thing,
+                isPageHeading: false,
+                classes: "govuk-fieldset__legend--s"
+              }
+            },
+            items: [
+            {
+              value: "Sift",
+              checked: checked(thing[loop.index],'Sift'),
+              text: "Sift"
+            },
+            {
+              value: "Interview",
+              checked: checked(thing[loop.index],'Interview'),
+              text: "Interview"
+            },
+            {
+              value: "Both stages",
+              checked: checked(thing[loop.index],'Both stages'),
+              text: "Both stages"
+            }
+            ]
+          }) }}
+        </div>
+        {% endfor %}{% endfor %}
+      </div>
+      {% endif %}
+
+
+
+      {% if data['criteria-experience-1'].length > 0 %}
+      <div class="govuk-!-margin-top-6" style="display:block;border:1px solid lightgrey;padding:10px">
+
+        <div class="govuk-!-margin-bottom-1" style="padding:5px">
+
+          <h2 class="govuk-heading-m">Experience</h2>
+        </div>
+
+
+
+
+        {% set expArr = [] %}
+
+        {% set expArr = (expArr.push(data['criteria-experience-1']), expArr) %}
+        {% endif %}
+
+        {% if data['criteria-experience-2'].length > 0 %}
+        {% set expArr = (expArr.push(data['criteria-experience-2']), expArr) %}
+        {% endif %}
+
+        {% if data['criteria-experience-3'].length > 0 %}
+        {% set expArr = (expArr.push(data['criteria-experience-3']), expArr) %}
+        {% endif %}
+
+        {% if expArr.length > 0 %}
+        {% for stuffs in expArr | slice(1) %}
+        {% for stuff in stuffs %}
+
+        <div class="govuk-!-margin-top-1" style="border:1px solid lightgrey;padding:10px">
+
+          {% from "govuk/components/radios/macro.njk" import govukRadios %}
+          {% set rand = rand4*3 %}
+          {{ govukRadios({
+            classes: "govuk-radios--small govuk-radios--inline",
+            name: stuff[loop.index0],
+            id: stuff[loop.index0],
+            fieldset: {
+              legend: {
+                text: stuff,
+                isPageHeading: false,
+                classes: "govuk-fieldset__legend--s"
+              }
+            },
+            items: [
+            {
+              value: "Sift",
+              checked: checked(stuff[loop.index0],'Sift'),
+              text: "Sift"
+            },
+            {
+              value: "Interview",
+              checked: checked(stuff[loop.index0],'Interview'),
+              text: "Interview"
+            },
+            {
+              value: "Both stages",
+              checked: checked(stuff[loop.index0],'Both stages'),
+              text: "Both stages"
+            }
+            ]
+          }) }}
+
+        </div>
+        {% endfor %}{% endfor %}
+      </div>
+      {% endif %}
+
+
+
+
+
+
+
+
+      {% if data['criteria-strength'].length > 0 %}
+      <div id="strInd" class="govuk-!-margin-top-6" style="display:block;border:1px solid lightgrey;padding:10px">
+
+        <div class="govuk-!-margin-bottom-1" style="padding:5px">
+          <span style="float:right" class="govuk-caption-m"><a onclick="hideDiv('strInd')" href="#">Same for all</a></span>
+          <h2 class="govuk-heading-m">Strengths</h2>
+        </div>
+
+
+
+        {% for strs in data['criteria-strength'] | slice(1)%}
+        {% for str in strs %}
+        <div class="govuk-!-margin-top-1" style="border:1px solid lightgrey;padding:10px">
+          {% from "govuk/components/radios/macro.njk" import govukRadios %}
+
+          {{ govukRadios({
+            classes: "govuk-radios--small govuk-radios--inline",
+            name: str[loop.index],
+            id: str[loop.index],
+            fieldset: {
+              legend: {
+                text: str,
+                isPageHeading: false,
+                classes: "govuk-fieldset__legend--s"
+              }
+            },
+            items: [
+            {
+              value: "Sift",
+              checked: checked(str[loop.index],'Sift'),
+              text: "Sift"
+            },
+            {
+              value: "Interview",
+              checked: checked(str[loop.index],'Interview'),
+              text: "Interview"
+            },
+            {
+              value: "Both stages",
+              checked: checked(str[loop.index],'Both stages'),
+              text: "Both stages"
+            }
+            ]
+          }) }}
+        </div>
+        {% endfor %}{% endfor %}
+      </div>
+
+
+      <div id="strSame" class="govuk-!-margin-top-6" style="display:none">
+        <div class="govuk-!-margin-bottom-1" style="border:1px solid lightgrey;padding:10px">
+          <div class="govuk-!-margin-bottom-1" style="padding:5px">
+            <span style="float:right" class="govuk-caption-m"><a onclick="hideDiv('strSame')" href="#">Individually</a></span>
+            <h2 class="govuk-heading-m">Strengths</h2>
+          </div>
+          {% set num = data['criteria-strength'].length %}
+          {% for tings in data['criteria-strength'] | slice(1)  %}
+          <div class="govuk-!-margin-top-1" style="border:1px solid lightgrey;padding:10px">
+            {% from "govuk/components/radios/macro.njk" import govukRadios %}
+
+            {{ govukRadios({
+              classes: "govuk-radios--small govuk-radios--inline",
+              name: 'together',
+              id: together,
+              fieldset: {
+                legend: {
+                  text: tings,
+                  isPageHeading: false,
+                  classes: "govuk-fieldset__legend--s"
+                }
+              },
+              items: [
+              {
+                value: "Sift",
+                checked: checked('together','Sift'),
+                text: "Sift"
+              },
+              {
+                value: "Interview",
+                checked: checked('together','Interview'),
+                text: "Interview"
+              },
+              {
+                value: "Both stages",
+                checked: checked('together','Both stages'),
+                text: "Both stages"
+              }
+              ]
+            }) }}
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      {% endif %}
+
+
+
+      <a href="#" onclick="checkRadio()">this</a>
+
+
+      <button class="govuk-button govuk-!-margin-top-6" data-module="govuk-button">Continue</button>
+    </form>
+
+    <script>
+
+function checkRadio(){
+      var radios = document.getElementsByTagName('input');
+      const siftArray = [];
+      var interviewArray = [];
+      var bothArray = [];
+
+       for (i = 0; i < radios.length; i++) {
+          if (radios[i].type == 'radio' && radios[i].checked) {
+            console.log(radios[i])
+            siftArray.push(radios[i]);
+            console.log(siftArray)
+
+
+          }
+      }
+    }
+
+      function showDiv(div){
+        document.getElementById(div).style.display = 'block';
+
+
+
+
+      }
+      function hideDiv(div){
+        document.getElementById(div).style.display = 'none';
+        if (div == "behInd") {
+          showDiv('behSame');
+        }
+        if (div == "behSame") {
+          showDiv('behInd')
+        }
+        if (div == "strInd") {
+          showDiv('strSame')
+        }
+        if (div == "strSame") {
+          showDiv('strInd')
+        }
+        if (div == "techInd") {
+          showDiv('techSame')
+        }
+        if (div == "techSame") {
+          showDiv('techInd')
+        }
+      }
+    </script>
+
+
+
+
+
+    {% endblock %}

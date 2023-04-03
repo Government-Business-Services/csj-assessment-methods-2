@@ -1,0 +1,190 @@
+{% extends "layouts/main.html" %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block pageTitle %}
+Check your answers template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+{{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds-from-desktop">
+
+    <h1 class="govuk-heading-xl">
+      Selection criteria summary</h1>
+
+      {% if data['criteria-behaviours'].length > 0 %}
+      {% for items in data['criteria-behaviours'] | slice(1)%}
+      {% for item in items %}
+      {{ govukSummaryList({
+        rows: [
+        {
+          key: {
+            text: "Behaviour"
+          },
+          value: {
+            text: item
+          },
+          actions: {
+            items: [
+            {
+              href: "select-behaviours?checkBeh=true",
+              text: "Change",
+              visuallyHiddenText: "Question 3"
+            }
+            ]
+          }
+        }
+        ]
+      }) }}
+      {% endfor %}{% endfor %}{% endif %}
+
+      {% if data['criteria-experience-1'].length > 0 %}
+      {% set expArr = [] %}
+
+      {% set expArr = (expArr.push(data['criteria-experience-1']), expArr) %}
+      {% endif %}
+
+      {% if data['criteria-experience-2'].length > 0 %}
+      {% set expArr = (expArr.push(data['criteria-experience-2']), expArr) %}
+      {% endif %}
+
+      {% if data['criteria-experience-3'].length > 0 %}
+      {% set expArr = (expArr.push(data['criteria-experience-3']), expArr) %}
+      {% endif %}
+
+      {% if expArr.length > 0 %}
+      {% set len = expArr.length %}
+      {% for items in expArr | slice(len) %}
+      {% for item in items %}
+
+
+      {{ govukSummaryList({
+        rows: [
+        {
+          key: {
+            text: "Experience"
+          },
+          value: {
+            text: item
+          },
+          actions: {
+            items: [
+            {
+              href: "select-experience?checkExp=true",
+              text: "Change",
+              visuallyHiddenText: "Question 3"
+            }
+            ]
+          }
+        }
+        ]
+      }) }}
+      {% endfor %}{% endfor %}{% endif %}
+
+
+      {% if data['criteria-technical-1'].length > 0 %}
+      {% set techArr = [] %}
+
+      {% set techArr = (techArr.push(data['criteria-technical-1']), techArr) %}
+      {% endif %}
+
+      {% if data['criteria-technical-2'].length > 0 %}
+      {% set techArr = (techArr.push(data['criteria-technical-2']), techArr) %}
+      {% endif %}
+
+      {% if data['criteria-technical-3'].length > 0 %}
+      {% set techArr = (techArr.push(data['criteria-technical-3']), techArr) %}
+      {% endif %}
+
+      {% if techArr.length > 0 %}
+      {% set n = techArr.length %}
+      {% for things in techArr | slice(n) %}
+      {% for thing in things %}
+
+
+      {{ govukSummaryList({
+        rows: [
+        {
+          key: {
+            text: "Technical skill"
+          },
+          value: {
+            text: thing
+          },
+          actions: {
+            items: [
+            {
+              href: "select-skills?checkTech=true",
+              text: "Change",
+              visuallyHiddenText: "Question 3"
+            }
+            ]
+          }
+        }
+        ]
+      }) }}
+      {% endfor %}{% endfor %}{% endif %}
+
+
+
+
+      {% if data['criteria-strength'].length > 0 %}
+
+      {% for items in data['criteria-strength'] | slice(1)%}
+      {% for item in items %}
+
+      {{ govukSummaryList({
+        rows: [
+        {
+          key: {
+            text: "Strength"
+          },
+          value: {
+            text: item
+          },
+          actions: {
+            items: [
+            {
+              href: "select-strengths?checkStr=true",
+              text: "Change",
+              visuallyHiddenText: "Question 3"
+            }
+            ]
+          }
+        }
+        ]
+      }) }}
+
+      {% endfor %}{% endfor %}
+      {% endif %}
+
+
+
+
+
+      <form action="#" method="post" novalidate>
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+{% if data['selectOptions'].length < '4' %}
+
+        {{ govukButton({
+          text: "Add different criteria",
+          href: "select-criteria-options",
+          classes: "govuk-button--secondary"
+        }) }}
+        {% endif %}
+      </form>
+
+    </div>
+  </div>
+  {% endblock %}

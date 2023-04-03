@@ -1,0 +1,61 @@
+{% extends "layouts/main.html" %}
+{% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
+
+{% block pageTitle %}
+Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+{{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+
+
+            {% set cars = ['Toyota', 'BMW', 'Volvo'] %}
+            {% set car_ids = [23, 35, 45] %}
+
+            {% for id in car_ids %}
+            {% set id = id+cars[loop.index0] %}
+
+
+
+                {{ govukRadios({
+                  classes: "govuk-radios--small govuk-radios--inline",
+                  name: 'stack',
+                  id: 'stack',
+                  fieldset: {
+                    legend: {
+                      text: id,
+                      isPageHeading: false,
+                      classes: "govuk-fieldset__legend--s"
+                    }
+                  },
+                  items: [
+                  {
+                    value: "Application",
+                    id: 'id',
+                    checked: checked('id','Application'),
+                    text: "Application"
+                  },
+                  {
+                    value: "Both stages",
+                    id: 'id',
+                    checked: checked('id','Both stages'),
+                    text: "Both stages"
+                  }
+                  ]
+                }) }}
+{{ data['stack']}}
+
+{% endfor %}
+
+
+
+
+
+{% endblock %}

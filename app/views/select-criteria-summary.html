@@ -1,0 +1,115 @@
+{% extends "layouts/main.html" %}
+{% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
+
+{% block pageTitle %}
+Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+{{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+
+
+
+
+<div id="top" class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds govuk-!-margin-bottom-0 govuk-!-margin-top-6">
+
+      <h1 class="govuk-heading-xl govuk-!-margin-top-9">Summary of your selection criteria</h1>
+  </div>
+</div>
+
+
+
+
+
+
+        {% if data['criteria-behaviours'].length > 0 %}
+        <h2 class="govuk-heading-l govuk-!-margin-top-6">Behaviours</h2>
+        {{ data['criteria-behaviours'] }}
+        {% endif %}
+
+
+
+
+        {% set expArr = [] %}
+        {% if data['criteria-experience-1'].length > 0 %}
+        <h2 class="govuk-heading-l govuk-!-margin-top-6">Experience</h2>
+        {% set expArr = (expArr.push(data['criteria-experience-1']), expArr) %}
+        {% endif %}
+
+        {% if data['criteria-experience-2'].length > 0 %}
+        {% set expArr = (expArr.push(data['criteria-experience-2']), expArr) %}
+        {% endif %}
+
+        {% if data['criteria-experience-3'].length > 0 %}
+        {% set expArr = (expArr.push(data['criteria-experience-3']), expArr) %}
+        {% endif %}
+        {{ expArr }}
+
+
+
+
+        {% set techArr = [] %}
+        {% if data['criteria-technical-1'].length > 0 %}
+        <h2 class="govuk-heading-l govuk-!-margin-top-6">Skills</h2>
+        {% set techArr = (techArr.push(data['criteria-technical-1']), techArr) %}
+        {% endif %}
+
+        {% if data['criteria-technical-2'].length > 0 %}
+        {% set techArr = (techArr.push(data['criteria-technical-2']), techArr) %}
+        {% endif %}
+
+        {% if data['criteria-technical-3'].length > 0 %}
+        {% set techArr = (techArr.push(data['criteria-technical-3']), techArr) %}
+        {% endif %}
+        {{ techArr }}
+
+
+        {% if data['criteria-strength'].length > 0 %}
+        <h2 class="govuk-heading-l govuk-!-margin-top-6">Strengths</h2>
+        {{ data['criteria-strength'] }}
+        {% endif %}
+
+        {% from "govuk/components/radios/macro.njk" import govukRadios %}
+
+        {{ govukRadios({
+          classes: "govuk-radios--inline",
+          name: "stage",
+          fieldset: {
+            legend: {
+              text: "When would you like to assess?",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          items: [
+            {
+              value: "Application",
+              text: "Application"
+            },
+            {
+              value: "Interview",
+              text: "Interview"
+            },
+            {
+              value: "Both stages",
+              text: "Both stages"
+            }
+          ]
+        }) }}
+
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-three-quarters">
+
+    <button class="govuk-button govuk-!-margin-top-6" data-module="govuk-button">Continue</button>
+  </div>
+</div>
+{% endblock %}

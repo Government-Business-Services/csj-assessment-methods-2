@@ -1,0 +1,39 @@
+{% from "govuk/components/textarea/macro.njk" import govukTextarea %}
+
+<div style="display:block" id="experience">
+  <h2 class="govuk-heading-l">Experience</h2>
+
+  <p class="govuk-body-m">You should use experience to assess a candidate's knowlege of an activity or subject gained through involvement in or exposure to it.</p>
+  {{ govukTextarea({
+    label: {
+      text: "Experience 1"
+    },
+    id: "criteria-experience-1",
+    rows: "2",
+    name: "criteria-experience-1",
+    value: data['criteria-experience-1']
+  }) }}
+
+  {{ govukTextarea({
+    label: {
+      text: "Experience 2"
+    },
+    id: "criteria-experience-2",
+    rows: "2",
+    name: "criteria-experience-2",
+    value: data['criteria-experience-2']
+  }) }}
+
+  {{ govukTextarea({
+    label: {
+      text: "Experience 3"
+    },
+    id: "criteria-experience-3",
+    rows: "2",
+    name: "criteria-experience-3",
+    value: data['criteria-experience-3']
+  }) }}
+
+  <a href="#top" class="govuk-link" ><p class="govuk-body-m" style="color:#1d70b8">Back to top</p></a>
+    <hr class="govuk-!-margin-top-6 govuk-!-margin-bottom-6">
+</div>

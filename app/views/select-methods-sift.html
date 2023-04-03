@@ -1,0 +1,40 @@
+{% extends "layouts/main.html" %}
+{% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
+
+{% block pageTitle %}
+Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+{{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+{{ siftArray }}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds-from-desktop">
+    <h1 class="govuk-heading-xl govuk-!-margin-top-9">Select methods for Sift</h1>
+
+    <p class="govuk-body-m">At sift, you want to shortlist the best candidates based on their skills and experience.</p>
+
+
+
+    <p class="govuk-body-m">Typically, we recommend you use a CV and personal statement to assess experience and skills.
+      Further, you can use specialised methods like portfolio or online tests for more specialised skills.</p>
+
+
+      <p class="govuk-body-m">You can choose for candidates to complete these all in one go, or break it down into stages.</p>
+<p class="govuk-body-m">Stages may help you further reduce your list of the best candidates before you have to manually assess them.</p>
+
+    <button class="govuk-button govuk-!-margin-top-6" data-module="govuk-button">Continue</button>
+  </div>
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,44 @@
+{% from "govuk/components/textarea/macro.njk" import govukTextarea %}
+
+
+<div style="display:block" id="skills">
+  <h2 class="govuk-heading-l">Skills</h2>
+
+
+  {{ govukTextarea({
+    label: {
+      text: "Technical skill 1"
+    },
+    id: "criteria-technical-1",
+    rows: "2",
+    name: "criteria-technical-1",
+    value: data['criteria-technical-1']
+  }) }}
+
+
+
+  {{ govukTextarea({
+    label: {
+      text: "Technical skill 2"
+    },
+    id: "criteria-technical-2",
+    rows: "2",
+    name: "criteria-technical-2",
+    value: data['criteria-technical-2']
+  }) }}
+
+
+
+  {{ govukTextarea({
+    label: {
+      text: "Technical skill 3"
+    },
+    id: "criteria-technical-3",
+    rows: "2",
+    name: "criteria-technical-3",
+    value: data['criteria-technical-3']
+  }) }}
+
+  <a href="#top" class="govuk-link" ><p class="govuk-body-m" style="color:#1d70b8">Back to top</p></a>
+  <hr class="govuk-!-margin-top-6 govuk-!-margin-bottom-6">
+</div>

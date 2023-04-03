@@ -1,0 +1,11 @@
+<ul class="govuk-list govuk-list--bullet-" style="font-size:22px;display: inline;">
+{% if (data['selectOptions'] == "Behaviours")
+<li style="text-align: left;display: inline;"><a href="select-behaviours"><p style="color:#1d70b8;font-size:22px;float:left;;padding-right:20px">Behaviours</p></a></li>
+{% elif (data['selectOptions'] == "Experience")
+<li style="text-align: left;display: inline;"><a href="select-experience"><p style="color:#1d70b8;font-size:22px;float:left;;padding-right:20px">Experience</p></a></li>
+{% elif (data['selectOptions'] == "Technical skills")
+<li style="text-align: left;display: inline;"><a href="select-skills"><p style="color:#1d70b8;font-size:22px;float:left;;padding-right:20px">Technical skills</p></a></li>
+{% elif (data['selectOptions'] == "Strengths")
+<li style="text-align: left;display: inline;"><a href="select-strengths"><p style="color:#1d70b8;font-size:22px;float:left;;padding-right:20px">Strengths</p></a></li>
+</ul>
+{% endif %}
